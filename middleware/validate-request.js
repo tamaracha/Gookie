@@ -1,9 +1,8 @@
-module.exports=validateRequest;
-function validateRequest(config){
+_=require('lodash');
+module.exports=function(config){
   return function(req,res,next){
-  console.log('validating request');
     if(!req.body.repository||!req.body.repository.url){
-      return next(new Error({status: 400, message: 'invalid JSON!'}));
+      return next('invalid JSON!');
     }
     var repo=_.find(config.repositories,{url: req.body.repository.url});
     if(!repo){
