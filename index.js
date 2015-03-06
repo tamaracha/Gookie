@@ -1,9 +1,9 @@
-var express,bodyParser,methodOverride,config,logger,app;
+var express,bodyParser,methodOverride,winston,config,app;
 express=require('express');
 bodyParser=require('body-parser');
 methodOverride=require('method-override');
-config=require('./lib/load-config')();
-logger=require('./lib/logger')(config);
+winston=require('winston');
+config=require('./load-config')();
 app=express();
 app.use(methodOverride());
 app.route('/')
@@ -18,16 +18,16 @@ app.route('/')
   require('./middleware/deploy'),
 function(req,res){
   if(req.body.zen){
-    logger.info('Ping event from ' + req.body.repository.url + ' with zen: ' + req.body['zen']);
+    winston.info('Ping event from ' + req.body.repository.url + ' with zen: ' + req.body['zen']);
   }
   else{
-    logger.verbose('User ' + req.body.pusher.name + ' pushed to ' + req.body.repository.url);
+    winston.verbose('User ' + req.body.pusher.name + ' pushed to ' + req.body.repository.url);
   }
   return res.sendStatus(204);
 });
 app.use(function(err,req,res,next){
-  logger.error(err);
+  winston.error(err);
   return res.sendStatus(err.status||500);
 });
 app.listen(config.port);
-logger.info('listening on port %s',config.port);
+winston.info('listening on port %d',config.port);

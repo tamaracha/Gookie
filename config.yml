@@ -1,0 +1,11 @@
+port: 9000
+repositories:
+  - url: https://github.com/tamaracha/statistikwbt
+    path: /home/git/apps/statistikwbt
+    deploy: git pull
+    secret: pbG8dNoAoRDfzUf4WzkX
+loggers:
+  - name: file
+    filename: logs/webhook.log
+    timestamp: true
+    json: false
