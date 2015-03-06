@@ -9,4 +9,4 @@ npm-debug.log
 .idea/
 
 # Personal config files
-config.json
+config.yml
