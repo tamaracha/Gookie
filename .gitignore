@@ -1,5 +1,5 @@
 # JS/Node
-node_modules/
+node_modules
 npm-debug.log
 
 # Logs
@@ -9,4 +9,4 @@ npm-debug.log
 .idea/
 
 # Personal config files
-config.yml
+config/local.yml

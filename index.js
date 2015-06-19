@@ -1,33 +1,23 @@
-var express,bodyParser,methodOverride,winston,config,app;
-express=require('express');
-bodyParser=require('body-parser');
-methodOverride=require('method-override');
-winston=require('winston');
-config=require('./load-config')();
-app=express();
-app.use(methodOverride());
-app.route('/')
-.get(function(req,res){
-  return res.sendStatus(200);
-})
-.post(
-  bodyParser.text({type: 'application/json'}),
+var koa=require('koa');
+var router=new require('koa-router')();
+var app=koa();
+require('koa-onerror')(app);
+var config=require('config');
+var server=config.get('server');
+router.get('/',function *(){
+  this.status=200;
+});
+router.post('/',
   require('./middleware/parse-body'),
-  require('./middleware/validate-request')(config),
+  require('./middleware/validate-request'),
   require('./middleware/github-token'),
   require('./middleware/deploy'),
-function(req,res){
-  if(req.body.zen){
-    winston.info('Ping event from ' + req.body.repository.url + ' with zen: ' + req.body['zen']);
+  function *(){
+    this.status=204;
   }
-  else{
-    winston.verbose('User ' + req.body.pusher.name + ' pushed to ' + req.body.repository.url);
-  }
-  return res.sendStatus(204);
+);
+app.use(router.routes())
+.use(router.allowedMethods())
+.listen(server.port,server.host,function(){
+  console.log(`listening on ${server.host}:${server.port}`);
 });
-app.use(function(err,req,res,next){
-  winston.error(err);
-  return res.sendStatus(err.status||500);
-});
-app.listen(config.port);
-winston.info('listening on port %d',config.port);

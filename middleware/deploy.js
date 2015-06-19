@@ -1,12 +1,7 @@
-var winston,childProcess;
-winston=require('winston');
-childProcess=require('child_process');
-module.exports=function(req,res,next){
-  var command = 'cd "' + req.repository.path+'" && '+req.repository.deploy;
-  childProcess.exec(command,function(err,stdout,stderr){
-    if(err){return next(err);}
-    if(stdout){winston.info(stdout);}
-    if(stderr){winston.warn(stderr);}
-    return next();
-  });
+var childProcess=require('child-process-promise');
+module.exports=function *(){
+  var command = `cd "${this.state.repository.path}" && ${this.state.repository.deploy}`;
+  var result=yield childProcess.exec(command);
+  if(result.stdout){console.log(result.stdout);}
+  if(result.stderr){console.warn(result.stderr);}
 };
