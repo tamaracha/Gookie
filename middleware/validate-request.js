@@ -1,6 +1,6 @@
 var _=require('lodash');
 var repositories=require('config').get('repositories');
-module.exports=function *(){
+module.exports=function *(next){
   if(!this.request.body.repository||!this.request.body.repository.url){
     this.throw('invalid json');
   }
@@ -9,4 +9,5 @@ module.exports=function *(){
     this.throw(this.request.body.repository.url+' sent a webhook but is not configured.');
   }
   this.state.repository=repo;
+  yield next;
 };

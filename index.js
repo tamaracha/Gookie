@@ -1,17 +1,22 @@
-var koa=require('koa');
-var router=new require('koa-router')();
-var app=koa();
+'use strict';
+const koa=require('koa');
+const router=new require('koa-router')();
+const app=koa();
 require('koa-onerror')(app);
-var config=require('config');
-var server=config.get('server');
+const config=require('config');
+const server=config.get('server');
+const parseBody = require('./middleware/parse-body');
+const validateRequest = require('./middleware/validate-request');
+const githubToken = require('./middleware/github-token');
+const deploy = require('./middleware/deploy');
+
 router.get('/',function *(){
   this.status=200;
 });
 router.post('/',
-  require('./middleware/parse-body'),
-  require('./middleware/validate-request'),
-  require('./middleware/github-token'),
-  require('./middleware/deploy'),
+  parseBody,
+  validateRequest,
+  githubToken,
   function *(){
     this.status=204;
   }

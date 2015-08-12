@@ -11,18 +11,15 @@
     "type": "git",
     "url": "https://github.com/tamaracha/Gookie"
   },
-  "bugs": {
-    "url": "https://github.com/hoxxep/Gookie/issues"
-  },
   "dependencies": {
     "child-process-promise": "^1.1.0",
-    "config": "^1.14.0",
-    "js-yaml": "^3.2.7",
+    "config": "^1.15.0",
+    "js-yaml": "^3.3.1",
     "koa": "^0.21.0",
     "koa-onerror": "^1.2.1",
     "koa-router": "^5.1.2",
-    "lodash": "^3.3.1",
-    "raw-body": "^2.1.1"
+    "lodash": "^3.10.1",
+    "raw-body": "^2.1.2"
   },
   "license": "MIT"
 }
