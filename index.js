@@ -1,11 +1,9 @@
 const githubhook = require('githubhook');
-const github = githubhook({
-  host: '127.0.0.1',
-  port: 9000,
-  path: '/',
-  logger: console
-});
+const config = require('config');
+const server = config.get('server');
+server.logger = console;
+const github = githubhook(server);
 github.listen();
-github.on('*',function(e,repo){
-  console.log(e);
+github.on('push',function(repo,ref,data){
+  console.log({repo, ref, data});
 });
