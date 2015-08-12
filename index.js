@@ -11,15 +11,15 @@ github.on('push',function(repo,ref,data){
   if(!repoConfig){
     return;
   }
-  child.exec(repoConfig.deploy,{cwd: repoConfig.path},function(err,stdout,stderr){
+  child.exec(repoConfig.deploy,function(err,stdout,stderr){
     if(err){
       console.error(err);
     }
     if(stdout){
-      console.log(stdout.toString());
+      console.log(stdout);
     }
     if(stderr){
-      console.warn(stderr.toString());
+      console.warn(stderr);
     }
   });
 });
