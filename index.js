@@ -11,13 +11,15 @@ github.on('push',function(repo,ref,data){
   if(!repoConfig){
     return;
   }
-  return child.exec(repoConfig.deploy,{cwd: repoConfig.path},function(err,stdout,stderr){
-    if(err){return err;}
+  child.exec(repoConfig.deploy,{cwd: repoConfig.path},function(err,stdout,stderr){
+    if(err){
+      console.error(err);
+    }
     if(stdout){
       console.log(stdout.toString());
     }
     if(stderr){
-      console.error(stderr.toString());
+      console.warn(stderr.toString());
     }
   });
 });
