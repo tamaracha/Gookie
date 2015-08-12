@@ -12,7 +12,7 @@ github.on('push',function(repo,ref,data){
   if(!repoConfig){
     return;
   }
-  child.exec(repoConfig.deploy,function(err,stdout,stderr){
+  child.exec(`cd ${repoConfig.path} && ${repoConfig.deploy}`,function(err,stdout,stderr){
     if(err){
       console.error(err);
     }
