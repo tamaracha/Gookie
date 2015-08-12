@@ -11,7 +11,7 @@ github.on('push',function(repo,ref,data){
   if(!repoConfig){
     return;
   }
-  const command = `cd ${repoconfig.path} && ${repoConfig.deploy}`;
+  const command = `cd ${repoConfig.path} && ${repoConfig.deploy}`;
   return child.exec(command,function(err,result){
     if(err){return err;}
     if(result.stdout){
