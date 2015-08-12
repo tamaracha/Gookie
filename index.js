@@ -8,6 +8,7 @@ const github = githubhook(server);
 github.listen();
 github.on('push',function(repo,ref,data){
   const repoConfig = repos[repo];
+  console.log(repoConfig);
   if(!repoConfig){
     return;
   }
