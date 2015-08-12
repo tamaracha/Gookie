@@ -11,14 +11,13 @@ github.on('push',function(repo,ref,data){
   if(!repoConfig){
     return;
   }
-  const command = `cd ${repoConfig.path} && ${repoConfig.deploy}`;
-  return child.exec(command,function(err,result){
+  return child.exec(repoConfig.deploy,{cwd: repoConfig.path},function(err,stdout,stderr){
     if(err){return err;}
-    if(result.stdout){
-      console.log(result.stdout);
+    if(stdout){
+      console.log(stdout.toString());
     }
-    if(result.stderr){
-      console.error(result.stderr);
+    if(stderr){
+      console.error(stderr.toString());
     }
   });
 });
