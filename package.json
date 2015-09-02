@@ -15,7 +15,8 @@
   "dependencies": {
     "config": "^1.15.0",
     "githubhook": "^1.2.0",
-    "js-yaml": "^3.4.0"
+    "js-yaml": "^3.4.0",
+    "pm2": "^0.14.7"
   },
   "license": "MIT"
 }
