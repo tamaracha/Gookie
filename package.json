@@ -1,6 +1,6 @@
 {
   "name": "Gookie",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Lightweight, configurable GitHub webhook server.",
   "author": "Tamara Cook",
   "private": true,
