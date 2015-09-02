@@ -3,6 +3,7 @@
   "version": "1.1.1",
   "description": "Lightweight, configurable GitHub webhook server.",
   "author": "Tamara Cook",
+  private: true,
   "scripts": {
     "start": "node --es-staging index.js"
   },
