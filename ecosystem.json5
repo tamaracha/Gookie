@@ -1,0 +1,19 @@
+{
+  apps: [
+    {
+      name: "gookie",
+      script: "index.js",
+      node_args: "--es-staging",
+      cwd: "/var/node/gookie",
+      port: "9000",
+      env": {
+        NODE_ENV: "production"
+      },
+      post_update: [
+        "echo updating deps",
+        "npm i --production",
+        "npm prune --production"
+      ]
+    }
+  ]
+}
