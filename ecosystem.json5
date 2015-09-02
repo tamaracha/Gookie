@@ -6,7 +6,7 @@
       node_args: "--es-staging",
       cwd: "/var/node/gookie",
       port: "9000",
-      env": {
+      env: {
         NODE_ENV: "production"
       },
       post_update: [
