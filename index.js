@@ -11,7 +11,7 @@ github.on('push',function(repo,ref,data){
   if(!repoConfig){
     return;
   }
-  child.exec(repoConfig.deploy,{cwd: repoConfig.path, env: {}},function(err,stdout,stderr){
+  child.exec(repoConfig.deploy,{cwd: repoConfig.path},function(err,stdout,stderr){
     if(err){
       console.error(err);
     }
